@@ -1,0 +1,16 @@
+shell:
+  program: "/bin/zsh"
+window:
+  decorations: "None"
+  padding:
+    x: 20
+    y: 20
+
+font:
+  size: 14
+  normal:
+    family: "JetBrainsMono Nerd Font"
+
+colors:
+  primary:
+    background: "#15181A"
