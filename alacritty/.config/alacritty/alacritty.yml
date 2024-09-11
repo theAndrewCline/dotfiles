@@ -1,7 +1,4 @@
-shell:
-  program: "/bin/zsh"
 window:
-  decorations: "None"
   padding:
     x: 20
     y: 20

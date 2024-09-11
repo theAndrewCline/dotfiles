@@ -1,0 +1,10 @@
+[colors.primary]
+background = "#15181A"
+
+[font]
+size = 14
+normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
+
+[window.padding]
+x = 20
+y = 20
