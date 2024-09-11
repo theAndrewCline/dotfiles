@@ -38,7 +38,6 @@ in {
     pkgs.nodePackages.prettier
     pkgs.nodePackages.typescript-language-server
     pkgs.vscode-langservers-extracted
-    pkgs.bash-language-server
     pkgs.postgresql_14
     pkgs.nil
     pkgs.speedtest-rs
@@ -331,6 +330,7 @@ in {
 
   programs.neovim = {
     enable = true;
+    package = unstable.neovim-unwrapped; 
     defaultEditor = true;
   };
 
@@ -380,6 +380,5 @@ in {
     enable = true;
     enableZshIntegration = true;
     nix-direnv.enable = true;
-    silent = true;
   };
 }
