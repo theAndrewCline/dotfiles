@@ -9,16 +9,14 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs =
-    { self, nixpkgs, home-manager, unstable-nixpkgs, ... }:
+  outputs = { self, nixpkgs, home-manager, unstable-nixpkgs, ... }:
 
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       unstable = unstable-nixpkgs.legacyPackages.${system};
-    in
-    {
+    in {
       nixosConfigurations = {
         sleepydesktop = lib.nixosSystem {
           inherit system;
@@ -29,13 +27,24 @@
       homeConfigurations = {
         acline = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = 
-      let
-        defaults = { pkgs, ... }: {
-          _module.args.pkgs-unstable = import unstable-nixpkgs { inherit (pkgs.stdenv.targetPlatform) system; };
+          modules = let
+            defaults = { pkgs, ... }: {
+              _module.args.pkgs-unstable = import unstable-nixpkgs {
+                inherit (pkgs.stdenv.targetPlatform) system;
+              };
+            };
+          in [ defaults ./home.nix ];
         };
-	in 
-	  [ defaults ./home.nix ];
+
+        cline = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = let
+            defaults = { pkgs, ... }: {
+              _module.args.pkgs-unstable = import unstable-nixpkgs {
+                inherit (pkgs.stdenv.targetPlatform) "aarch64-darwin";
+              };
+            };
+          in [ defaults ./home.nix ];
         };
       };
     };

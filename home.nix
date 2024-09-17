@@ -5,12 +5,11 @@ let
   isLinux = pkgs.stdenv.isLinux;
   colors = import ./colors.nix { };
 
-in
-{
+in {
   imports = [ ];
 
-  home.username = "acline";
-  home.homeDirectory = "/home/acline";
+  home.username = "cline";
+  home.homeDirectory = "/Home/acline";
   home.packages = with pkgs; [
     openssl
     httpie
@@ -204,10 +203,7 @@ in
     historyLimit = 5000;
     baseIndex = 1;
     terminal = "alacritty";
-    plugins = with pkgs; [
-      tmuxPlugins.yank
-      tmuxPlugins.vim-tmux-navigator
-    ];
+    plugins = with pkgs; [ tmuxPlugins.yank tmuxPlugins.vim-tmux-navigator ];
     extraConfig = ''
       set -g pane-border-style 'fg=${colors.dim.white} bg=${colors.background}'
       set -g pane-active-border-style 'bg=#15181A fg=colour14'
@@ -273,17 +269,14 @@ in
     v = "nvim";
   };
 
-  home.sessionPath = [
-    "$HOME/.local/bin"
-    "$HOME/go/bin"
-    "$HOME/.scripts"
-  ];
+  home.sessionPath = [ "$HOME/.local/bin" "$HOME/go/bin" "$HOME/.scripts" ];
 
   programs.oh-my-posh = {
     enable = true;
     enableZshIntegration = true;
     settings = {
-      "$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json";
+      "$schema" =
+        "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json";
       final_space = true;
       version = 2;
       blocks = [
@@ -297,9 +290,7 @@ in
               style = "plain";
               foreground = "cyan";
               background = "transparent";
-              properties = {
-                style = "full";
-              };
+              properties = { style = "full"; };
               template = "{{ .Path }} ";
             }
             {
@@ -307,7 +298,8 @@ in
               style = "plain";
               background = "transparent";
               foreground = "#5b5f66";
-              template = " {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</> ";
+              template =
+                " {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</> ";
               properties = {
                 branch_icon = "";
                 fetch_status = true;
@@ -328,51 +320,39 @@ in
           type = "rprompt";
           overflow = "hidden";
           alignment = "right";
-          segments = [
-            {
-              type = "executiontime";
-              style = "plain";
-              foreground = "lightYellow";
-              background = "transparent";
-              template = "{{ .FormattedMs }}";
-              properties = {
-                threshold = 5000;
-              };
-            }
-          ];
+          segments = [{
+            type = "executiontime";
+            style = "plain";
+            foreground = "lightYellow";
+            background = "transparent";
+            template = "{{ .FormattedMs }}";
+            properties = { threshold = 5000; };
+          }];
         }
 
         {
           type = "prompt";
           alignment = "left";
           newline = true;
-          segments = [
-            {
-              type = "text";
-              style = "plain";
-              foreground_templates = [
-                "{{if gt .Code 0}}red{{end}}"
-                "{{if eq .Code 0}}blue{{end}}"
-              ];
-              template = "❯";
-            }
-          ];
+          segments = [{
+            type = "text";
+            style = "plain";
+            foreground_templates =
+              [ "{{if gt .Code 0}}red{{end}}" "{{if eq .Code 0}}blue{{end}}" ];
+            template = "❯";
+          }];
         }
       ];
       transient_prompt = {
         background = "transparent";
         template = "❯ ";
-        foreground_templates = [
-          "{{if gt .Code 0}}red{{end}}"
-          "{{if eq .Code 0}}blue{{end}}"
-        ];
+        foreground_templates =
+          [ "{{if gt .Code 0}}red{{end}}" "{{if eq .Code 0}}blue{{end}}" ];
       };
     };
   };
 
-  programs.fzf = {
-    enable = true;
-  };
+  programs.fzf = { enable = true; };
 
   programs.helix = {
     enable = true;
@@ -429,10 +409,7 @@ in
           name = "typescript";
           formatter = {
             command = "prettier";
-            args = [
-              "--parser"
-              "typescript"
-            ];
+            args = [ "--parser" "typescript" ];
           };
           auto-format = true;
         }
@@ -441,10 +418,7 @@ in
           name = "tsx";
           formatter = {
             command = "prettier";
-            args = [
-              "--parser"
-              "typescript"
-            ];
+            args = [ "--parser" "typescript" ];
           };
           auto-format = true;
         }
@@ -453,10 +427,7 @@ in
           name = "javascript";
           formatter = {
             command = "prettier";
-            args = [
-              "--parser"
-              "javascript"
-            ];
+            args = [ "--parser" "javascript" ];
           };
           auto-format = true;
         }
@@ -465,10 +436,7 @@ in
           name = "javascript";
           formatter = {
             command = "prettier";
-            args = [
-              "--parser"
-              "javascript"
-            ];
+            args = [ "--parser" "javascript" ];
           };
           auto-format = true;
         }
@@ -477,10 +445,7 @@ in
           name = "html";
           formatter = {
             command = "prettier";
-            args = [
-              "--parser"
-              "html"
-            ];
+            args = [ "--parser" "html" ];
           };
           auto-format = true;
         }
@@ -489,10 +454,7 @@ in
           name = "json";
           formatter = {
             command = "prettier";
-            args = [
-              "--parser"
-              "json"
-            ];
+            args = [ "--parser" "json" ];
           };
           auto-format = true;
         }
@@ -518,23 +480,17 @@ in
     userName = "Andrew Cline";
     extraConfig = {
       init.defaultBranch = "main";
-      core = {
-        editor = "nvim";
-      };
+      core = { editor = "nvim"; };
       push.autoSetupRemote = true;
       url = {
-        "ssh://git@git.2020.dev/" = {
-          insteadOf = "https://git.2020.dev/";
-        };
+        "ssh://git@git.2020.dev/" = { insteadOf = "https://git.2020.dev/"; };
       };
     };
   };
 
   programs.lazygit = {
     enable = true;
-    settings = {
-      disableStartupPopups = true;
-    };
+    settings = { disableStartupPopups = true; };
   };
 
   programs.awscli = {
@@ -542,13 +498,9 @@ in
     package = pkgs.awscli2;
   };
 
-  programs.ssh = {
-    enable = true;
-  };
+  programs.ssh = { enable = true; };
 
-  programs.yazi = {
-    enable = true;
-  };
+  programs.yazi = { enable = true; };
 
   programs.direnv = {
     enable = true;
@@ -557,7 +509,7 @@ in
   };
 
   gtk = {
-    enable = true;
+    enable = isLinux;
     theme = {
       package = pkgs.flat-remix-gtk;
       name = "Flat-Remix-GTK-Grey-Darkest";
