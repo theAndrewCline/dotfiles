@@ -12,7 +12,6 @@ in
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    <home-manager/nixos>
   ];
 
   nix.settings.experimental-features = [
@@ -100,11 +99,11 @@ in
     packages = with pkgs; [ discord ];
   };
 
-  home-manager.users.acline = import ./modules/home.nix {
-    pkgs = pkgs;
-    unstablePkgs = unstable.pkgs;
-  };
-  home-manager.backupFileExtension = "bak";
+  # home-manager.users.acline = import ./modules/home.nix {
+  #   pkgs = pkgs;
+  #   unstablePkgs = unstable.pkgs;
+  # };
+  # home-manager.backupFileExtension = "bak";
 
   nixpkgs.config.allowUnfree = true;
 

@@ -14,7 +14,7 @@
     in
     {
       nixosConfigurations = {
-        sleepyDesktop = lib.nixosSystem {
+        sleepydesktop = lib.nixosSystem {
           system = "x86_64-linux";
           modules = [ ./configuration.nix ];
         };
