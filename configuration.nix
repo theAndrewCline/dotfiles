@@ -5,7 +5,6 @@
 { config, pkgs, ... }:
 
 let
-  unstable = import <unstable> { };
 
 in
 {
@@ -112,9 +111,10 @@ in
   environment.systemPackages = with pkgs; [
     vim
     wget
+    git
+
     unzip
     zip
-    unstable.neovim
     gcc
     alacritty
 
