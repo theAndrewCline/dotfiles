@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, pkgs-unstable, ... }:
 
 let
   isDarwin = pkgs.stdenv.isDarwin;
@@ -508,7 +508,7 @@ in
 
   programs.neovim = {
     enable = true;
-    # package = unstablePkgs.neovim-unwrapped;
+    package = pkgs-unstable.neovim-unwrapped;
     defaultEditor = true;
   };
 
