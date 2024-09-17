@@ -6,17 +6,13 @@
 
 let
 
-in
-{
+in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -88,12 +84,7 @@ in
   users.users.acline = {
     isNormalUser = true;
     description = "Andrew Cline";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "audio"
-      "docker"
-    ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "docker" ];
     shell = pkgs.zsh;
     packages = with pkgs; [ discord ];
   };

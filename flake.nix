@@ -13,7 +13,7 @@
 
     let
       lib = nixpkgs.lib;
-      system = "x86_64-linux";
+      system = "aarch64-darwin";
       pkgs = nixpkgs.legacyPackages.${system};
       unstable = unstable-nixpkgs.legacyPackages.${system};
     in {
