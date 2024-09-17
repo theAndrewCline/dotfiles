@@ -13,7 +13,7 @@
 
     let
       lib = nixpkgs.lib;
-      system = "aarch64-darwin";
+      system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       unstable = unstable-nixpkgs.legacyPackages.${system};
     in {
@@ -31,17 +31,6 @@
             defaults = { pkgs, ... }: {
               _module.args.pkgs-unstable = import unstable-nixpkgs {
                 inherit (pkgs.stdenv.targetPlatform) system;
-              };
-            };
-          in [ defaults ./home.nix ];
-        };
-
-        cline = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = let
-            defaults = { pkgs, ... }: {
-              _module.args.pkgs-unstable = import unstable-nixpkgs {
-                inherit (pkgs.stdenv.targetPlatform) "aarch64-darwin";
               };
             };
           in [ defaults ./home.nix ];
