@@ -10,7 +10,7 @@ in
   imports = [ ];
 
   home.username = "acline";
-  home.homeDirectory = "/home/aline";
+  home.homeDirectory = "/home/acline";
   home.packages = with pkgs; [
     openssl
     httpie
@@ -508,7 +508,7 @@ in
 
   programs.neovim = {
     enable = true;
-    package = pkgs.neovim-unwrapped;
+    # package = pkgs.neovim-unwrapped;
     defaultEditor = true;
   };
 
