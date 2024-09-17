@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, unstablePkgs, ... }:
 
 let
   isDarwin = pkgs.stdenv.isDarwin;
@@ -9,8 +9,6 @@ in
 {
   imports = [ ];
 
-  home.username = "acline";
-  home.homeDirectory = "/home/acline";
   home.packages = with pkgs; [
     openssl
     httpie
@@ -508,7 +506,7 @@ in
 
   programs.neovim = {
     enable = true;
-    # package = pkgs.neovim-unwrapped;
+    package = unstablePkgs.neovim-unwrapped;
     defaultEditor = true;
   };
 
