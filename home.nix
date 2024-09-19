@@ -50,8 +50,6 @@ in
     mongosh
     raycast
 
-    alacritty
-
     #i3 Stuff
     sddm-chili-theme
     rofi

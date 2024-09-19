@@ -11,6 +11,13 @@ in
 
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/mountain.yaml";
   stylix.image = ./red-blue-wall.jpg;
+  stylix.targets.alacritty.enable = true;
+
+  stylix.fonts = {
+    monospace = {
+      name = "JetBrainsMono Nerd Font";
+    };
+  };
 
   home.username = "cline";
   home.homeDirectory = "/Users/cline";
@@ -85,17 +92,17 @@ in
   programs.alacritty = {
     enable = true;
     settings = {
-      colors.primary = {
-        background = colors.background;
-        foreground = colors.foreground;
-      };
-      font = {
-        size = 14;
-        normal = {
-          family = "JetBrainsMono Nerd Font";
-          style = "Regular";
-        };
-      };
+      # colors.primary = {
+      #   background = colors.background;
+      #   foreground = colors.foreground;
+      # };
+      #   font = {
+      #     size = 18;
+      #     normal = {
+      #       family = "JetBrainsMono Nerd Font";
+      #       style = "Regular";
+      #     };
+      #   };
       window = {
         padding = {
           x = 20;
