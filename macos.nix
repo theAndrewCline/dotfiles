@@ -1,8 +1,10 @@
 { pkgs, pkgs-unstable, ... }:
 
-let colors = import ./colors.nix { };
+let
+  colors = import ./colors.nix { };
 
-in {
+in
+{
   imports = [ ];
 
   nixpkgs.config.allowUnfree = true;
@@ -73,7 +75,9 @@ in {
     '';
   };
 
-  xdg.configFile = { "nvim/init.lua".text = builtins.readFile ./xdg/nvim.lua; };
+  xdg.configFile = {
+    "nvim/init.lua".text = builtins.readFile ./xdg/nvim.lua;
+  };
 
   programs.alacritty = {
     enable = true;
@@ -113,7 +117,10 @@ in {
     historyLimit = 5000;
     baseIndex = 1;
     terminal = "alacritty";
-    plugins = with pkgs; [ tmuxPlugins.yank tmuxPlugins.vim-tmux-navigator ];
+    plugins = with pkgs; [
+      tmuxPlugins.yank
+      tmuxPlugins.vim-tmux-navigator
+    ];
     extraConfig = ''
       set -g pane-border-style 'fg=${colors.dim.white} bg=${colors.background}'
       set -g pane-active-border-style 'bg=#15181A fg=colour14'
@@ -177,14 +184,17 @@ in {
     v = "nvim";
   };
 
-  home.sessionPath = [ "$HOME/.local/bin" "$HOME/go/bin" "$HOME/.scripts" ];
+  home.sessionPath = [
+    "$HOME/.local/bin"
+    "$HOME/go/bin"
+    "$HOME/.scripts"
+  ];
 
   programs.oh-my-posh = {
     enable = true;
     enableZshIntegration = true;
     settings = {
-      "$schema" =
-        "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json";
+      "$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json";
       final_space = true;
       version = 2;
       blocks = [
@@ -198,7 +208,9 @@ in {
               style = "plain";
               foreground = "cyan";
               background = "transparent";
-              properties = { style = "full"; };
+              properties = {
+                style = "full";
+              };
               template = "{{ .Path }} ";
             }
             {
@@ -206,8 +218,7 @@ in {
               style = "plain";
               background = "transparent";
               foreground = "#5b5f66";
-              template =
-                " {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</> ";
+              template = " {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</> ";
               properties = {
                 branch_icon = "";
                 fetch_status = true;
@@ -228,39 +239,51 @@ in {
           type = "rprompt";
           overflow = "hidden";
           alignment = "right";
-          segments = [{
-            type = "executiontime";
-            style = "plain";
-            foreground = "lightYellow";
-            background = "transparent";
-            template = "{{ .FormattedMs }}";
-            properties = { threshold = 5000; };
-          }];
+          segments = [
+            {
+              type = "executiontime";
+              style = "plain";
+              foreground = "lightYellow";
+              background = "transparent";
+              template = "{{ .FormattedMs }}";
+              properties = {
+                threshold = 5000;
+              };
+            }
+          ];
         }
 
         {
           type = "prompt";
           alignment = "left";
           newline = true;
-          segments = [{
-            type = "text";
-            style = "plain";
-            foreground_templates =
-              [ "{{if gt .Code 0}}red{{end}}" "{{if eq .Code 0}}blue{{end}}" ];
-            template = "❯";
-          }];
+          segments = [
+            {
+              type = "text";
+              style = "plain";
+              foreground_templates = [
+                "{{if gt .Code 0}}red{{end}}"
+                "{{if eq .Code 0}}blue{{end}}"
+              ];
+              template = "❯";
+            }
+          ];
         }
       ];
       transient_prompt = {
         background = "transparent";
         template = "❯ ";
-        foreground_templates =
-          [ "{{if gt .Code 0}}red{{end}}" "{{if eq .Code 0}}blue{{end}}" ];
+        foreground_templates = [
+          "{{if gt .Code 0}}red{{end}}"
+          "{{if eq .Code 0}}blue{{end}}"
+        ];
       };
     };
   };
 
-  programs.fzf = { enable = true; };
+  programs.fzf = {
+    enable = true;
+  };
 
   programs.neovim = {
     enable = true;
@@ -274,17 +297,23 @@ in {
     userName = "Andrew Cline";
     extraConfig = {
       init.defaultBranch = "main";
-      core = { editor = "nvim"; };
+      core = {
+        editor = "nvim";
+      };
       push.autoSetupRemote = true;
       url = {
-        "ssh://git@git.2020.dev/" = { insteadOf = "https://git.2020.dev/"; };
+        "ssh://git@git.2020.dev/" = {
+          insteadOf = "https://git.2020.dev/";
+        };
       };
     };
   };
 
   programs.lazygit = {
     enable = true;
-    settings = { disableStartupPopups = true; };
+    settings = {
+      disableStartupPopups = true;
+    };
   };
 
   programs.awscli = {
@@ -292,7 +321,9 @@ in {
     package = pkgs.awscli2;
   };
 
-  programs.ssh = { enable = true; };
+  programs.ssh = {
+    enable = true;
+  };
 
   programs.direnv = {
     enable = true;
