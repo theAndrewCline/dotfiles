@@ -5,6 +5,8 @@ let colors = import ./colors.nix { };
 in {
   imports = [ ];
 
+  nixpkgs.config.allowUnfree = true;
+
   home.username = "cline";
   home.homeDirectory = "/Home/cline";
   home.packages = with pkgs; [
@@ -74,92 +76,6 @@ in {
   xdg.configFile = {
     "i3/config".text = builtins.readFile ./i3;
     "nvim/init.lua".text = builtins.readFile ./nvim.lua;
-    "rofi/config.lua".text = builtins.readFile ./rofi.rasi;
-    "rofi/theme.lua".text = builtins.readFile ./rofi-theme.rasi;
-
-    "polybar/config.ini".text = ''
-      [bar/minimal]
-      height=3%
-      radius=0
-      width=100%
-
-      dpi = 96
-
-      background = ${colors.background}
-      foreground = ${colors.foreground}
-
-      font-0 = JetBrainsMono Nerd Font:size=22
-
-      module-margin = 1
-      padding-right = 1
-
-      modules-center = date
-      modules-left = xworkspaces xwindow
-      modules-right =  memory cpu wlan eth
-
-      [module/date]
-      date=%d-%m.%y
-      internal=5
-      label=%time% %date%
-      time=%H:%M
-      type=internal/date
-
-      [module/xworkspaces]
-      type = internal/xworkspaces
-
-      label-active = %name%
-      label-active-background = ${colors.bright.white} 
-      label-active-foreground = ${colors.foreground} 
-      ; label-active-underline= "" 
-      label-active-padding = 1
-
-      label-occupied = %name%
-      label-occupied-padding = 1
-
-      label-urgent = %name%
-      ; label-urgent-background = ""
-      label-urgent-padding = 1
-
-      label-empty = %name%
-      ; label-empty-foreground = ""
-      label-empty-padding = 1
-
-      [module/xwindow]
-      type = internal/xwindow
-      label = %title:0:60:...%
-
-      [module/memory]
-      type = internal/memory
-      interval = 2
-      format-prefix = "RAM "
-      format-prefix-foreground = ${colors.foreground}
-      label = %percentage_used:2%%
-
-      [module/cpu]
-      type = internal/cpu
-      interval = 2
-      format-prefix = "CPU "
-      format-prefix-foreground = ${colors.foreground}
-      label = %percentage:2%%
-
-      [network-base]
-      type = internal/network
-      interval = 5
-      format-connected = <label-connected>
-      format-disconnected = <label-disconnected>
-      label-disconnected = %{F#F0C674}%ifname%%{F#707880} disconnected
-
-      [module/wlan]
-      inherit = network-base
-      interface-type = wireless
-      label-connected = %{F#F0C674}%ifname%%{F-} %essid%
-
-      [module/eth]
-      inherit = network-base
-      interface-type = wired
-      label-connected = %{F#F0C674}%ifname%%{F-} %local_ip%
-
-    '';
   };
 
   programs.alacritty = {
