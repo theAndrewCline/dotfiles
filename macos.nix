@@ -8,7 +8,7 @@ in {
   nixpkgs.config.allowUnfree = true;
 
   home.username = "cline";
-  home.homeDirectory = "/Home/cline";
+  home.homeDirectory = "/Users/cline";
   home.packages = with pkgs; [
     openssl
     httpie
@@ -73,10 +73,7 @@ in {
     '';
   };
 
-  xdg.configFile = {
-    "i3/config".text = builtins.readFile ./i3;
-    "nvim/init.lua".text = builtins.readFile ./nvim.lua;
-  };
+  xdg.configFile = { "nvim/init.lua".text = builtins.readFile ./xdg/nvim.lua; };
 
   programs.alacritty = {
     enable = true;

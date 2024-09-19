@@ -15,7 +15,7 @@
       lib = nixpkgs.lib;
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      unstable = unstable-nixpkgs.legacyPackages.${system};
+      pkgs-unstable = unstable-nixpkgs.legacyPackages.${system};
     in {
       nixosConfigurations = {
         sleepydesktop = lib.nixosSystem {
@@ -27,24 +27,16 @@
       homeConfigurations = {
         acline = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = let
-            defaults = { pkgs, ... }: {
-              _module.args.pkgs-unstable = import unstable-nixpkgs {
-                inherit (pkgs.stdenv.targetPlatform) system;
-              };
-            };
-          in [ defaults ./home.nix ];
+          modules = [ ./home.nix ];
+          extraSpecialArgs = { inherit pkgs-unstable; };
         };
 
         cline = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = let
-            defaults = { pkgs, ... }: {
-              _module.args.pkgs-unstable = import unstable-nixpkgs {
-                inherit (pkgs.stdenv.targetPlatform) system;
-              };
-            };
-          in [ defaults ./macos.nix ];
+          pkgs = nixpkgs.legacyPackages."aarch64-darwin";
+          modules = [ ./macos.nix ];
+          extraSpecialArgs = let
+            pkgs-unstable = unstable-nixpkgs.legacyPackages."aarch64-darwin";
+          in { inherit pkgs-unstable; };
         };
       };
     };
