@@ -11,11 +11,22 @@ in
 
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/mountain.yaml";
   stylix.image = ./red-blue-wall.jpg;
-  stylix.targets.alacritty.enable = true;
+  stylix.targets.wezterm.enable = true;
 
   stylix.fonts = {
     monospace = {
+      package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
       name = "JetBrainsMono Nerd Font";
+    };
+
+    serif = {
+      package = pkgs.dejavu_fonts;
+      name = "DejaVu Serif";
+    };
+
+    sansSerif = {
+      package = pkgs.dejavu_fonts;
+      name = "DejaVu Sans";
     };
   };
 
@@ -88,6 +99,8 @@ in
   xdg.configFile = {
     "nvim/init.lua".text = builtins.readFile ./xdg/nvim.lua;
   };
+
+  programs.wezterm.enable = true;
 
   programs.alacritty = {
     enable = true;
