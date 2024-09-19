@@ -35,6 +35,17 @@
             };
           in [ defaults ./home.nix ];
         };
+
+        cline = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = let
+            defaults = { pkgs, ... }: {
+              _module.args.pkgs-unstable = import unstable-nixpkgs {
+                inherit (pkgs.stdenv.targetPlatform) system;
+              };
+            };
+          in [ defaults ./macos.nix ];
+        };
       };
     };
 }
