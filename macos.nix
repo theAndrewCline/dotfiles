@@ -9,6 +9,9 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/mountain.yaml";
+  stylix.image = ./red-blue-wall.jpg;
+
   home.username = "cline";
   home.homeDirectory = "/Users/cline";
   home.packages = with pkgs; [
@@ -116,7 +119,7 @@ in
     escapeTime = 0;
     historyLimit = 5000;
     baseIndex = 1;
-    terminal = "screen-color265";
+    terminal = "screen-256color";
     plugins = with pkgs; [
       tmuxPlugins.yank
       tmuxPlugins.vim-tmux-navigator
@@ -143,7 +146,7 @@ in
       # messages
       set -g message-style 'fg=colour0 bg=colour3 bold'
 
-      set-option -ga terminal-overrides ',xterm-256colors:Tc'
+      set-option -a terminal-features 'xterm-256color:RGB'
     '';
   };
 

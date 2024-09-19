@@ -5,6 +5,9 @@
     nixpkgs.url = "nixpkgs/nixos-24.05";
     unstable-nixpkgs.url = "nixpkgs/nixos-unstable";
 
+    stylix.url = "github:danth/stylix";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
+
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -15,6 +18,7 @@
       nixpkgs,
       home-manager,
       unstable-nixpkgs,
+      stylix,
       ...
     }:
 
@@ -43,7 +47,10 @@
 
         cline = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."aarch64-darwin";
-          modules = [ ./macos.nix ];
+          modules = [
+            ./macos.nix
+            stylix.homeManagerModules.stylix
+          ];
           extraSpecialArgs =
             let
               pkgs-unstable = unstable-nixpkgs.legacyPackages."aarch64-darwin";
