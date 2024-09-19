@@ -143,7 +143,7 @@ in
       # messages
       set -g message-style 'fg=colour0 bg=colour3 bold'
 
-      set-option -ga terminal-overrides ',alacritty:Tc'
+      set-option -ga terminal-overrides ',xterm-256colors:Tc'
     '';
   };
 
