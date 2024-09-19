@@ -116,7 +116,7 @@ in
     escapeTime = 0;
     historyLimit = 5000;
     baseIndex = 1;
-    terminal = "alacritty";
+    # terminal = "alacritty";
     plugins = with pkgs; [
       tmuxPlugins.yank
       tmuxPlugins.vim-tmux-navigator
