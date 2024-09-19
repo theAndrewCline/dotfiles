@@ -6,13 +6,17 @@
 
 let
 
-in {
+in
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configs/desktop-hardware.nix
   ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -88,7 +92,12 @@ in {
   users.users.acline = {
     isNormalUser = true;
     description = "Andrew Cline";
-    extraGroups = [ "networkmanager" "wheel" "audio" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "audio"
+      "docker"
+    ];
     shell = pkgs.zsh;
     packages = with pkgs; [ discord ];
   };
@@ -111,39 +120,6 @@ in {
     unzip
     zip
     gcc
-    alacritty
-
-    #i3 Stuff
-    sddm-chili-theme
-    rofi
-    picom
-    polybar
-    feh
-    lxappearance
-
-    brave
-
-    nodejs
-    go
-    rustup
-    spotify
-    slack
-    telegram-desktop
-    xclip
-  ];
-
-  fonts.packages = with pkgs; [
-    noto-fonts
-    (pkgs.nerdfonts.override {
-      fonts = [
-        "FiraCode"
-        "FiraMono"
-        "Go-Mono"
-        "Inconsolata"
-        "InconsolataGo"
-        "JetBrainsMono"
-      ];
-    })
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
