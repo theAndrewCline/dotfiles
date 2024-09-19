@@ -154,6 +154,7 @@ in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
+    ".scripts/o".source = ./scripts/o;
   };
 
   # Home Manager can also manage your environment variables through
