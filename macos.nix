@@ -116,7 +116,7 @@ in
     escapeTime = 0;
     historyLimit = 5000;
     baseIndex = 1;
-    # terminal = "alacritty";
+    terminal = "screen-color265";
     plugins = with pkgs; [
       tmuxPlugins.yank
       tmuxPlugins.vim-tmux-navigator
@@ -320,6 +320,7 @@ in
   programs.awscli = {
     enable = true;
     package = pkgs.awscli2;
+    settings = import ./aws_configs.nix;
   };
 
   programs.ssh = {
