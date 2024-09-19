@@ -9,9 +9,9 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/mountain.yaml";
+  stylix.enable = true;
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/ayu-mirage.yaml";
   stylix.image = ./red-blue-wall.jpg;
-  stylix.targets.wezterm.enable = true;
 
   stylix.fonts = {
     monospace = {
@@ -105,17 +105,9 @@ in
   programs.alacritty = {
     enable = true;
     settings = {
-      # colors.primary = {
-      #   background = colors.background;
-      #   foreground = colors.foreground;
-      # };
-      #   font = {
-      #     size = 18;
-      #     normal = {
-      #       family = "JetBrainsMono Nerd Font";
-      #       style = "Regular";
-      #     };
-      #   };
+      font = {
+        size = 18;
+      };
       window = {
         padding = {
           x = 20;
@@ -241,7 +233,7 @@ in
               type = "git";
               style = "plain";
               background = "transparent";
-              foreground = "#5b5f66";
+              foreground = "lightblack";
               template = " {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</> ";
               properties = {
                 branch_icon = "";
