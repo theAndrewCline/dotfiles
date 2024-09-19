@@ -9,7 +9,7 @@ let
 in {
   imports = [
     # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+    ./hardware-configs/desktop-hardware.nix
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -49,6 +49,8 @@ in {
   hardware = {
     opengl.enable = true;
     nvidia.modesetting.enable = true;
+    bluetooth.enable = true;
+    bluetooth.powerOnBoot = true;
   };
 
   # SOUND
@@ -71,6 +73,8 @@ in {
       theme = "chili";
     };
   };
+
+  services.blueman.enable = true;
 
   environment.variables = {
     # GDK_SCALE = "2.2"; # default 1 I think
