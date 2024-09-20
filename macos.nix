@@ -25,23 +25,30 @@ in
     # -- base06 - Light Foreground (Not often used)
     base06 = "#eceff3";
     # -- base07 - Light Background (Not often used)
-    base07 = "#15181A";
+    base07 = "#eceff3";
     # -- base08 - Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
-    base08 = "#93C394";
+    base08 = "#DFB0B0";
     # -- base09 - Integers, Boolean, Constants, XML Attributes, Markup Link Url
     base09 = "#FFA474";
     # -- base0A - Classes, Markup Bold, Search Text Background
     base0A = "#FFD187";
     # -- base0B - Strings, Inherited Class, Markup Code, Diff Inserted
-    base0B = "#729973";
+    base0B = "#93C394";
     # -- base0C - Support, Regular Expressions, Escape Characters, Markup Quotes
     base0C = "#87afaf";
     # -- base0D - Functions, Methods, Attribute IDs, Headings
     base0D = "#80B6D7";
     # -- base0E - Keywords, Storage, Selector, Markup Italic, Diff Changed
-    base0E = "#DFB0B0";
+    base0E = "#875f5f";
     # -- base0F - Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
-    base0F = "#E7E3E2";
+    base0F = "#e9dbc2";
+    base10 = "#242a2d";
+    base11 = "#15181A";
+    base12 = "#DFB0B0";
+    base13 = "#729973";
+    base14 = "#5f8787";
+    base15 = "#5e90af";
+    base16 = "#af8787";
   };
   stylix.image = ./red-blue-wall.jpg;
 
@@ -140,6 +147,12 @@ in
     extraConfig = ''
       return {
         enable_tab_bar = false,
+        window_padding = {
+          left = 40,
+          right = 40,
+          top = 40,
+          bottom = 40,
+        },
       }
     '';
   };

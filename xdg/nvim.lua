@@ -740,17 +740,17 @@ require("lazy").setup({
 				-- base05 - Default Foreground, Caret, Delimiters, Operators
 				base05 = "#E1E3E6",
 				-- base06 - Light Foreground (Not often used)
-				base06 = "#3C4344",
+				base06 = "#eceff3",
 				-- base07 - Light Background (Not often used)
-				base07 = "#15181A",
+				base07 = "#eceff3",
 				-- base08 - Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
-				base08 = "#93C394",
+				base08 = "#DFB0B0",
 				-- base09 - Integers, Boolean, Constants, XML Attributes, Markup Link Url
 				base09 = "#FFA474",
 				-- base0A - Classes, Markup Bold, Search Text Background
 				base0A = "#FFD187",
 				-- base0B - Strings, Inherited Class, Markup Code, Diff Inserted
-				base0B = "#729973",
+				base0B = "#93C394",
 				-- base0C - Support, Regular Expressions, Escape Characters, Markup Quotes
 				base0C = "#87afaf",
 				-- base0D - Functions, Methods, Attribute IDs, Headings
@@ -758,7 +758,7 @@ require("lazy").setup({
 				-- base0E - Keywords, Storage, Selector, Markup Italic, Diff Changed
 				base0E = "#DFB0B0",
 				-- base0F - Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
-				base0F = "#E7E3E2",
+				base0F = "#e9dbc2",
 			}
 
 			require("mini.base16").setup({ palette = palette, use_cterm = true })
