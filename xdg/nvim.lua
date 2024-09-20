@@ -761,7 +761,7 @@ require("lazy").setup({
 				base0F = "#E7E3E2",
 			}
 
-			-- require("mini.base16").setup({ palette = palette, use_cterm = true })
+			require("mini.base16").setup({ palette = palette, use_cterm = true })
 
 			-- Simple and easy statusline.
 			--  You could remove this setup call if you don't like it,

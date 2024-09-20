@@ -4,7 +4,6 @@ let
   isDarwin = pkgs.stdenv.isDarwin;
   isLinux = pkgs.stdenv.isLinux;
   colors = import ./colors.nix { };
-
 in
 {
   imports = [ ];
