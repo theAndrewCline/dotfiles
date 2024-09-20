@@ -46,6 +46,7 @@ in
   stylix.image = ./red-blue-wall.jpg;
 
   stylix.targets.neovim.enable = false;
+  stylix.targets.lazygit.enable = false;
 
   stylix.fonts = {
     monospace = {
