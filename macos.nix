@@ -13,31 +13,31 @@ in
     # -- base00 - Default Background
     base00 = "#15181A";
     # -- base01 - Lighter Background (Used for status bars, line number and folding marks)
-    base01 = "#15181A";
+    base01 = "#242a2d";
     # -- base02 - Selection Background
     base02 = "#3C4344";
     # -- base03 - Comments, Invisibles, Line Highlighting
     base03 = "#737A82";
     # -- base04 - Dark Foreground (Used for status bars)
-    base04 = "#737A82";
+    base04 = "#3C4344";
     # -- base05 - Default Foreground, Caret, Delimiters, Operators
     base05 = "#E1E3E6";
     # -- base06 - Light Foreground (Not often used)
-    base06 = "#3C4344";
+    base06 = "#eceff3";
     # -- base07 - Light Background (Not often used)
     base07 = "#15181A";
     # -- base08 - Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
-    base08 = "#D0CAC9";
+    base08 = "#93C394";
     # -- base09 - Integers, Boolean, Constants, XML Attributes, Markup Link Url
     base09 = "#FFA474";
     # -- base0A - Classes, Markup Bold, Search Text Background
     base0A = "#FFD187";
     # -- base0B - Strings, Inherited Class, Markup Code, Diff Inserted
-    base0B = "#93C394";
+    base0B = "#729973";
     # -- base0C - Support, Regular Expressions, Escape Characters, Markup Quotes
-    base0C = "#80B6D7";
+    base0C = "#87afaf";
     # -- base0D - Functions, Methods, Attribute IDs, Headings
-    base0D = "#FFD187";
+    base0D = "#80B6D7";
     # -- base0E - Keywords, Storage, Selector, Markup Italic, Diff Changed
     base0E = "#DFB0B0";
     # -- base0F - Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
@@ -103,15 +103,15 @@ in
     nixfmt-rfc-style
     raycast
 
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
+    # It is sometimes useful to fine-tune packages, for example, by applying
+    # overrides. You can do that directly here, just don't forget the
+    # parentheses. Maybe you want to install Nerd Fonts with a limited number of
+    # fonts?
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
 
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
+    # You can also create simple shell scripts directly inside your
+    # configuration. For example, this adds a command 'my-hello' to your
+    # environment:
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
@@ -135,18 +135,13 @@ in
     "nvim/init.lua".text = builtins.readFile ./xdg/nvim.lua;
   };
 
-  programs.wezterm.enable = true;
-
-  programs.alacritty = {
+  programs.wezterm = {
     enable = true;
-    settings = {
-      window = {
-        padding = {
-          x = 20;
-          y = 20;
-        };
-      };
-    };
+    extraConfig = ''
+      return {
+        enable_tab_bar = false,
+      }
+    '';
   };
 
   programs.atuin = {
@@ -253,7 +248,7 @@ in
               type = "git";
               style = "plain";
               background = "transparent";
-              foreground = "lightblack";
+              foreground = "#737A82";
               template = " {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</> ";
               properties = {
                 branch_icon = "";
