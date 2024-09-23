@@ -27,7 +27,7 @@ in
     # -- base07 - Light Background (Not often used)
     base07 = "#eceff3";
     # -- base08 - Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
-    base08 = "#DFB0B0";
+    base08 = "#df9a98";
     # -- base09 - Integers, Boolean, Constants, XML Attributes, Markup Link Url
     base09 = "#FFA474";
     # -- base0A - Classes, Markup Bold, Search Text Background
@@ -39,12 +39,12 @@ in
     # -- base0D - Functions, Methods, Attribute IDs, Headings
     base0D = "#80B6D7";
     # -- base0E - Keywords, Storage, Selector, Markup Italic, Diff Changed
-    base0E = "#875f5f";
+    base0E = "#dfbdbc";
     # -- base0F - Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
     base0F = "#e9dbc2";
     base10 = "#242a2d";
     base11 = "#15181A";
-    base12 = "#DFB0B0";
+    base12 = "#e07798";
     base13 = "#729973";
     base14 = "#5f8787";
     base15 = "#5e90af";

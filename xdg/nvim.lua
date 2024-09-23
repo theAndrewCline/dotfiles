@@ -756,7 +756,7 @@ require("lazy").setup({
 				-- base0D - Functions, Methods, Attribute IDs, Headings
 				base0D = "#80B6D7",
 				-- base0E - Keywords, Storage, Selector, Markup Italic, Diff Changed
-				base0E = "#DFB0B0",
+				base0E = "#dfbdbc",
 				-- base0F - Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
 				base0F = "#e9dbc2",
 			}
