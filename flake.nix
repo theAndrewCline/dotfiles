@@ -32,14 +32,20 @@
       nixosConfigurations = {
         sleepydesktop = lib.nixosSystem {
           inherit system;
-          modules = [ ./configuration.nix ];
+          modules = [
+            ./configuration.nix
+            stylix.nixosModules.stylix
+          ];
         };
       };
 
       homeConfigurations = {
         acline = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ ./home.nix ];
+          modules = [
+            ./home.nix
+            stylix.homeManagerModules.stylix
+          ];
           extraSpecialArgs = {
             inherit pkgs-unstable;
           };

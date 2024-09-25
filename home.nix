@@ -47,7 +47,6 @@ in
     lazydocker
     nixfmt-rfc-style
     mongosh
-    raycast
 
     #i3 Stuff
     sddm-chili-theme
@@ -90,6 +89,70 @@ in
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
+
+  stylix.enable = true;
+  stylix.base16Scheme = {
+    # -- base00 - Default Background
+    base00 = "#15181A";
+    # -- base01 - Lighter Background (Used for status bars, line number and folding marks)
+    base01 = "#242a2d";
+    # -- base02 - Selection Background
+    base02 = "#3C4344";
+    # -- base03 - Comments, Invisibles, Line Highlighting
+    base03 = "#737A82";
+    # -- base04 - Dark Foreground (Used for status bars)
+    base04 = "#3C4344";
+    # -- base05 - Default Foreground, Caret, Delimiters, Operators
+    base05 = "#E1E3E6";
+    # -- base06 - Light Foreground (Not often used)
+    base06 = "#eceff3";
+    # -- base07 - Light Background (Not often used)
+    base07 = "#eceff3";
+    # -- base08 - Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
+    base08 = "#df9a98";
+    # -- base09 - Integers, Boolean, Constants, XML Attributes, Markup Link Url
+    base09 = "#FFA474";
+    # -- base0A - Classes, Markup Bold, Search Text Background
+    base0A = "#FFD187";
+    # -- base0B - Strings, Inherited Class, Markup Code, Diff Inserted
+    base0B = "#93C394";
+    # -- base0C - Support, Regular Expressions, Escape Characters, Markup Quotes
+    base0C = "#87afaf";
+    # -- base0D - Functions, Methods, Attribute IDs, Headings
+    base0D = "#80B6D7";
+    # -- base0E - Keywords, Storage, Selector, Markup Italic, Diff Changed
+    base0E = "#dfbdbc";
+    # -- base0F - Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
+    base0F = "#e9dbc2";
+    base10 = "#242a2d";
+    base11 = "#15181A";
+    base12 = "#e07798";
+    base13 = "#729973";
+    base14 = "#5f8787";
+    base15 = "#5e90af";
+    base16 = "#af8787";
+  };
+  stylix.image = ./red-blue-wall.jpg;
+
+  stylix.targets.neovim.enable = false;
+  stylix.targets.lazygit.enable = false;
+
+  stylix.fonts = {
+    monospace = {
+      package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+      name = "JetBrainsMono Nerd Font";
+    };
+
+    serif = {
+      package = pkgs.dejavu_fonts;
+      name = "DejaVu Serif";
+    };
+
+    sansSerif = {
+      package = pkgs.dejavu_fonts;
+      name = "DejaVu Sans";
+    };
+  };
 
   programs.zsh = {
     enable = true;
@@ -199,17 +262,6 @@ in
   programs.alacritty = {
     enable = true;
     settings = {
-      colors.primary = {
-        background = colors.background;
-        foreground = colors.foreground;
-      };
-      font = {
-        size = 14;
-        normal = {
-          family = "JetBrainsMono Nerd Font";
-          style = "Regular";
-        };
-      };
       window = {
         padding = {
           x = 20;
@@ -217,6 +269,22 @@ in
         };
       };
     };
+  };
+
+  programs.wezterm = {
+    enable = true;
+    extraConfig = ''
+      return {
+        enable_tab_bar = false,
+        font_size = 24,
+        window_padding = {
+          left = 30,
+          right = 30,
+          top = 30,
+          bottom = 30,
+        },
+      }
+    '';
   };
 
   programs.atuin = {
@@ -404,138 +472,6 @@ in
     enable = true;
   };
 
-  programs.helix = {
-    enable = true;
-    defaultEditor = false;
-    settings = {
-      theme = "custom";
-      editor = {
-        line-number = "relative";
-        auto-format = true;
-        bufferline = "always";
-        cursor-shape.insert = "bar";
-        statusline.center = [ "version-control" ];
-        soft-wrap.enable = true;
-        lsp = {
-          # display-inlay-hints = true;
-          display-messages = true;
-        };
-        file-picker.hidden = false;
-      };
-    };
-    themes = {
-      custom = {
-        inherits = "base16_transparent";
-        attribute = "blue";
-        function = "light-blue";
-        "function.method" = "light-green";
-        "variable" = "white";
-        "variable.other.member" = "cyan";
-        string = "light-yellow";
-        "string.special" = "light-green";
-        comment = "green";
-        "comment.modifiers" = [ "italic" ];
-        "ui.linenr" = "white dim";
-      };
-    };
-    languages = {
-      # language-server.deno-lsp = {
-      #   command = "deno";
-      #   args = ["lsp"];
-      #   config.deno.enable = true;
-      # };
-      language = [
-        # {
-        #   name = "typescript";
-        #   scope = "source.ts";
-        #   shebangs = ["deno"];
-        #   roots = ["deno.json" "deno.jsonc"];
-        #   file-types = ["ts" "js" "tsx"];
-        #   language-servers = ["deno-lsp"];
-        #   auto-format = true;
-        # }
-
-        {
-          name = "typescript";
-          formatter = {
-            command = "prettier";
-            args = [
-              "--parser"
-              "typescript"
-            ];
-          };
-          auto-format = true;
-        }
-
-        {
-          name = "tsx";
-          formatter = {
-            command = "prettier";
-            args = [
-              "--parser"
-              "typescript"
-            ];
-          };
-          auto-format = true;
-        }
-
-        {
-          name = "javascript";
-          formatter = {
-            command = "prettier";
-            args = [
-              "--parser"
-              "javascript"
-            ];
-          };
-          auto-format = true;
-        }
-
-        {
-          name = "javascript";
-          formatter = {
-            command = "prettier";
-            args = [
-              "--parser"
-              "javascript"
-            ];
-          };
-          auto-format = true;
-        }
-
-        {
-          name = "html";
-          formatter = {
-            command = "prettier";
-            args = [
-              "--parser"
-              "html"
-            ];
-          };
-          auto-format = true;
-        }
-
-        {
-          name = "json";
-          formatter = {
-            command = "prettier";
-            args = [
-              "--parser"
-              "json"
-            ];
-          };
-          auto-format = true;
-        }
-
-        {
-          name = "rust";
-          auto-format = true;
-          language-servers = [ "rust-analyzer" ];
-        }
-      ];
-    };
-  };
-
   programs.neovim = {
     enable = true;
     package = pkgs-unstable.neovim-unwrapped;
@@ -586,21 +522,21 @@ in
     nix-direnv.enable = true;
   };
 
-  gtk = {
-    enable = isLinux;
-    theme = {
-      package = pkgs.flat-remix-gtk;
-      name = "Flat-Remix-GTK-Grey-Darkest";
-    };
-    iconTheme = {
-      package = pkgs.gnome.adwaita-icon-theme;
-      name = "Adwaita";
-    };
-    font = {
-      name = "Sans";
-      size = 11;
-    };
-  };
+  # gtk = {
+  #   enable = isLinux;
+  #   theme = {
+  #     package = pkgs.flat-remix-gtk;
+  #     name = "Flat-Remix-GTK-Grey-Darkest";
+  #   };
+  #   iconTheme = {
+  #     package = pkgs.gnome.adwaita-icon-theme;
+  #     name = "Adwaita";
+  #   };
+  #   font = {
+  #     name = "Sans";
+  #     size = 11;
+  #   };
+  # };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
