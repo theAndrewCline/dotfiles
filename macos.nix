@@ -82,13 +82,14 @@ in
     pnpm
     deno
     yarn-berry
-    mods
+    pkgs-unstable.mods
     go
     rustup
     marksman
     gopls
     nodePackages.prettier
     nodePackages.typescript-language-server
+    nodePackages.typescript
     vscode-langservers-extracted
     postgresql_14
     nil
@@ -108,6 +109,7 @@ in
     localstack
     lazydocker
     nixfmt-rfc-style
+    raycast
     raycast
 
     # It is sometimes useful to fine-tune packages, for example, by applying
@@ -147,11 +149,12 @@ in
     extraConfig = ''
       return {
         enable_tab_bar = false,
+        font_size = 20,
         window_padding = {
-          left = 40,
-          right = 40,
-          top = 40,
-          bottom = 40,
+          left = 30,
+          right = 30,
+          top = 30,
+          bottom = 30,
         },
       }
     '';
