@@ -5,7 +5,7 @@
 
   nixpkgs.config.allowUnfree = true;
   stylix.enable = true;
-  stylix.base16Scheme = ./base16-theme.nix;
+  stylix.base16Scheme = import ./base16-theme.nix { };
   stylix.image = ./red-blue-wall.jpg;
 
   stylix.targets.neovim.enable = false;
@@ -150,13 +150,9 @@
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
-  # home.file = {
-  # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-  # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-  # # symlink to the Nix store copy.
-  # ".screenrc".source = dotfiles/screenrc;
-  # ".scripts/o".source = ./scripts/o;
-  # };
+  home.file = {
+    ".scripts/o".source = ./scripts/o;
+  };
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a

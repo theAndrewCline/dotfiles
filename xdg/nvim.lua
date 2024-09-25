@@ -729,23 +729,23 @@ require("lazy").setup({
 
 			local palette = {
 				-- base00 - Default Background
-				base00 = "#15181A",
+				base00 = "#1e2022",
 				-- base01 - Lighter Background (Used for status bars, line number and folding marks)
-				base01 = "#15181A",
+				base01 = "#1e2022",
 				-- base02 - Selection Background
 				base02 = "#3C4344",
 				-- base03 - Comments, Invisibles, Line Highlighting
 				base03 = "#737A82",
 				-- base04 - Dark Foreground (Used for status bars)
-				base04 = "#E1E3E6",
+				base04 = "#d8dce1",
 				-- base05 - Default Foreground, Caret, Delimiters, Operators
-				base05 = "#E1E3E6",
+				base05 = "#d8dce1",
 				-- base06 - Light Foreground (Not often used)
-				base06 = "#eceff3",
+				base06 = "#d8dce1",
 				-- base07 - Light Background (Not often used)
-				base07 = "#eceff3",
+				base07 = "#d8dce1",
 				-- base08 - Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
-				base08 = "#DFB0B0",
+				base08 = "#d8dce1",
 				-- base09 - Integers, Boolean, Constants, XML Attributes, Markup Link Url
 				base09 = "#FFA474",
 				-- base0A - Classes, Markup Bold, Search Text Background
@@ -759,7 +759,7 @@ require("lazy").setup({
 				-- base0E - Keywords, Storage, Selector, Markup Italic, Diff Changed
 				base0E = "#dfbdbc",
 				-- base0F - Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
-				base0F = "#e9dbc2",
+				base0F = "#d8dce1",
 			}
 
 			require("mini.base16").setup({ palette = palette, use_cterm = true })
@@ -767,17 +767,17 @@ require("lazy").setup({
 			-- Simple and easy statusline.
 			--  You could remove this setup call if you don't like it,
 			--  and try some other statusline plugin
-			local statusline = require("mini.statusline")
+			-- local statusline = require("mini.statusline")
 			-- -- set use_icons to true if you have a Nerd Font
-			statusline.setup({ use_icons = vim.g.have_nerd_font })
+			-- statusline.setup({ use_icons = vim.g.have_nerd_font })
 
 			-- You can configure sections in the statusline by overriding their
 			-- default behavior. For example, here we set the section for
 			-- cursor location to LINE:COLUMN
 			---@diagnostic disable-next-line: duplicate-set-field
-			statusline.section_location = function()
-				return "%2l:%-2v"
-			end
+			-- statusline.section_location = function()
+			-- 	return "%2l:%-2v"
+			-- end
 
 			require("mini.tabline").setup({})
 			require("mini.pairs").setup({})

@@ -1,20 +1,21 @@
+{ ... }:
 {
   # -- base00 - Default Background
-  base00 = "#3a3e41";
+  base00 = "#1e2022";
   # -- base01 - Lighter Background (Used for status bars, line number and folding marks)
-  base01 = "#242a2d";
+  base01 = "#1e2022";
   # -- base02 - Selection Background
   base02 = "#3C4344";
   # -- base03 - Comments, Invisibles, Line Highlighting
   base03 = "#737A82";
   # -- base04 - Dark Foreground (Used for status bars)
-  base04 = "#3C4344";
+  base04 = "#d8dce1";
   # -- base05 - Default Foreground, Caret, Delimiters, Operators
-  base05 = "#E1E3E6";
+  base05 = "#d8dce1";
   # -- base06 - Light Foreground (Not often used)
-  base06 = "#eceff3";
+  base06 = "#d8dce1";
   # -- base07 - Light Background (Not often used)
-  base07 = "#eceff3";
+  base07 = "#d8dce1";
   # -- base08 - Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
   base08 = "#df9a98";
   # -- base09 - Integers, Boolean, Constants, XML Attributes, Markup Link Url
@@ -31,8 +32,8 @@
   base0E = "#dfbdbc";
   # -- base0F - Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
   base0F = "#e9dbc2";
-  base10 = "#242a2d";
-  base11 = "#15181A";
+  base10 = "#1e2022";
+  base11 = "#1e2022";
   base12 = "#e07798";
   base13 = "#729973";
   base14 = "#5f8787";
