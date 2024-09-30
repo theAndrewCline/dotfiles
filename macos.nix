@@ -36,7 +36,7 @@
     atuin
     nodejs
     pnpm
-    deno
+    pkgs-unstable.deno
     yarn-berry
     pkgs-unstable.mods
     go
@@ -66,7 +66,7 @@
     lazydocker
     nixfmt-rfc-style
     raycast
-    raycast
+    pkgs-unstable.sqlite
 
     # It is sometimes useful to fine-tune packages, for example, by applying
     # overrides. You can do that directly here, just don't forget the
@@ -138,11 +138,11 @@
     extraConfig = ''
 
       # statusbar
-      # set -g status-position bottom
-      # set -g status-justify left
-      # set -g status-left "" 
-      # set -g status-right "#S"
-      # setw -g window-status-format ' #I:#W#F '
+      set -g status-position bottom
+      set -g status-justify left
+      set -g status-left "" 
+      set -g status-right "#S"
+      setw -g window-status-format ' #I:#W#F '
 
       set-option -a terminal-features 'xterm-256color:RGB'
     '';
