@@ -441,7 +441,6 @@ require("lazy").setup({
 				templ = {},
 				rust_analyzer = {},
 				ts_ls = {},
-				-- denols = {},
 				eslint = {},
 				astro = {},
 				ruby_lsp = {},
