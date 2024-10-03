@@ -105,7 +105,7 @@
     extraConfig = ''
       return {
         enable_tab_bar = false,
-        font_size = 20,
+        font_size = 16,
         window_padding = {
           left = 30,
           right = 30,
