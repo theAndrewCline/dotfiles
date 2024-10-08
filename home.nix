@@ -327,7 +327,7 @@ in
       # messages
       set -g message-style 'fg=colour0 bg=colour3 bold'
 
-      set-option -ga terminal-overrides ',alacritty:Tc'
+      set-option -a terminal-features 'xterm-256color:RGB'
     '';
   };
 
@@ -339,7 +339,7 @@ in
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
+    ".scripts/o".source = ./scripts/o;
   };
 
   # Home Manager can also manage your environment variables through
