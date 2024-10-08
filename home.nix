@@ -2,7 +2,6 @@
 
 let
   isLinux = pkgs.stdenv.isLinux;
-  colors = import ./colors.nix { };
 in
 {
   imports = [ ];
@@ -89,69 +88,29 @@ in
     # '')
   ];
 
-  stylix.enable = true;
-  stylix.base16Scheme = {
-    # -- base00 - Default Background
-    base00 = "#15181A";
-    # -- base01 - Lighter Background (Used for status bars, line number and folding marks)
-    base01 = "#242a2d";
-    # -- base02 - Selection Background
-    base02 = "#3C4344";
-    # -- base03 - Comments, Invisibles, Line Highlighting
-    base03 = "#737A82";
-    # -- base04 - Dark Foreground (Used for status bars)
-    base04 = "#3C4344";
-    # -- base05 - Default Foreground, Caret, Delimiters, Operators
-    base05 = "#E1E3E6";
-    # -- base06 - Light Foreground (Not often used)
-    base06 = "#eceff3";
-    # -- base07 - Light Background (Not often used)
-    base07 = "#eceff3";
-    # -- base08 - Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
-    base08 = "#df9a98";
-    # -- base09 - Integers, Boolean, Constants, XML Attributes, Markup Link Url
-    base09 = "#FFA474";
-    # -- base0A - Classes, Markup Bold, Search Text Background
-    base0A = "#FFD187";
-    # -- base0B - Strings, Inherited Class, Markup Code, Diff Inserted
-    base0B = "#93C394";
-    # -- base0C - Support, Regular Expressions, Escape Characters, Markup Quotes
-    base0C = "#87afaf";
-    # -- base0D - Functions, Methods, Attribute IDs, Headings
-    base0D = "#80B6D7";
-    # -- base0E - Keywords, Storage, Selector, Markup Italic, Diff Changed
-    base0E = "#dfbdbc";
-    # -- base0F - Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
-    base0F = "#e9dbc2";
-    base10 = "#242a2d";
-    base11 = "#15181A";
-    base12 = "#e07798";
-    base13 = "#729973";
-    base14 = "#5f8787";
-    base15 = "#5e90af";
-    base16 = "#af8787";
-  };
-  stylix.image = ./red-blue-wall.jpg;
-
-  stylix.targets.neovim.enable = false;
-  stylix.targets.lazygit.enable = false;
-
-  stylix.fonts = {
-    monospace = {
-      package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
-      name = "JetBrainsMono Nerd Font";
-    };
-
-    serif = {
-      package = pkgs.dejavu_fonts;
-      name = "DejaVu Serif";
-    };
-
-    sansSerif = {
-      package = pkgs.dejavu_fonts;
-      name = "DejaVu Sans";
-    };
-  };
+  # stylix.enable = true;
+  # stylix.base16Scheme = import ./base16-theme.nix { };
+  # stylix.image = ./red-blue-wall.jpg;
+  #
+  # stylix.targets.neovim.enable = false;
+  # stylix.targets.lazygit.enable = false;
+  #
+  # stylix.fonts = {
+  #   monospace = {
+  #     package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+  #     name = "JetBrainsMono Nerd Font";
+  #   };
+  #
+  #   serif = {
+  #     package = pkgs.dejavu_fonts;
+  #     name = "DejaVu Serif";
+  #   };
+  #
+  #   sansSerif = {
+  #     package = pkgs.dejavu_fonts;
+  #     name = "DejaVu Sans";
+  #   };
+  # };
 
   programs.zsh = {
     enable = true;
@@ -173,89 +132,89 @@ in
     "rofi/config.lua".text = builtins.readFile ./xdg/rofi.rasi;
     "rofi/theme.lua".text = builtins.readFile ./xdg/rofi-theme.rasi;
 
-    "polybar/config.ini".text = ''
-      [bar/minimal]
-      height=3%
-      radius=0
-      width=100%
-
-      dpi = 96
-
-      background = ${colors.background}
-      foreground = ${colors.foreground}
-
-      font-0 = JetBrainsMono Nerd Font:size=22
-
-      module-margin = 1
-      padding-right = 1
-
-      modules-center = date
-      modules-left = xworkspaces xwindow
-      modules-right =  memory cpu wlan eth
-
-      [module/date]
-      date=%d-%m.%y
-      internal=5
-      label=%time% %date%
-      time=%H:%M
-      type=internal/date
-
-      [module/xworkspaces]
-      type = internal/xworkspaces
-
-      label-active = %name%
-      label-active-background = ${colors.bright.white} 
-      label-active-foreground = ${colors.foreground} 
-      ; label-active-underline= "" 
-      label-active-padding = 1
-
-      label-occupied = %name%
-      label-occupied-padding = 1
-
-      label-urgent = %name%
-      ; label-urgent-background = ""
-      label-urgent-padding = 1
-
-      label-empty = %name%
-      ; label-empty-foreground = ""
-      label-empty-padding = 1
-
-      [module/xwindow]
-      type = internal/xwindow
-      label = %title:0:60:...%
-
-      [module/memory]
-      type = internal/memory
-      interval = 2
-      format-prefix = "RAM "
-      format-prefix-foreground = ${colors.foreground}
-      label = %percentage_used:2%%
-
-      [module/cpu]
-      type = internal/cpu
-      interval = 2
-      format-prefix = "CPU "
-      format-prefix-foreground = ${colors.foreground}
-      label = %percentage:2%%
-
-      [network-base]
-      type = internal/network
-      interval = 5
-      format-connected = <label-connected>
-      format-disconnected = <label-disconnected>
-      label-disconnected = %{F#F0C674}%ifname%%{F#707880} disconnected
-
-      [module/wlan]
-      inherit = network-base
-      interface-type = wireless
-      label-connected = %{F#F0C674}%ifname%%{F-} %essid%
-
-      [module/eth]
-      inherit = network-base
-      interface-type = wired
-      label-connected = %{F#F0C674}%ifname%%{F-} %local_ip%
-
-    '';
+    # "polybar/config.ini".text = ''
+    #   [bar/minimal]
+    #   height=3%
+    #   radius=0
+    #   width=100%
+    #
+    #   dpi = 96
+    #
+    #   # background = ${colors.background}
+    #   # foreground = ${colors.foreground}
+    #
+    #   font-0 = JetBrainsMono Nerd Font:size=22
+    #
+    #   module-margin = 1
+    #   padding-right = 1
+    #
+    #   modules-center = date
+    #   modules-left = xworkspaces xwindow
+    #   modules-right =  memory cpu wlan eth
+    #
+    #   [module/date]
+    #   date=%d-%m.%y
+    #   internal=5
+    #   label=%time% %date%
+    #   time=%H:%M
+    #   type=internal/date
+    #
+    #   [module/xworkspaces]
+    #   type = internal/xworkspaces
+    #
+    #   label-active = %name%
+    #   label-active-background = ${colors.bright.white} 
+    #   label-active-foreground = ${colors.foreground} 
+    #   ; label-active-underline= "" 
+    #   label-active-padding = 1
+    #
+    #   label-occupied = %name%
+    #   label-occupied-padding = 1
+    #
+    #   label-urgent = %name%
+    #   ; label-urgent-background = ""
+    #   label-urgent-padding = 1
+    #
+    #   label-empty = %name%
+    #   ; label-empty-foreground = ""
+    #   label-empty-padding = 1
+    #
+    #   [module/xwindow]
+    #   type = internal/xwindow
+    #   label = %title:0:60:...%
+    #
+    #   [module/memory]
+    #   type = internal/memory
+    #   interval = 2
+    #   format-prefix = "RAM "
+    #   format-prefix-foreground = ${colors.foreground}
+    #   label = %percentage_used:2%%
+    #
+    #   [module/cpu]
+    #   type = internal/cpu
+    #   interval = 2
+    #   format-prefix = "CPU "
+    #   format-prefix-foreground = ${colors.foreground}
+    #   label = %percentage:2%%
+    #
+    #   [network-base]
+    #   type = internal/network
+    #   interval = 5
+    #   format-connected = <label-connected>
+    #   format-disconnected = <label-disconnected>
+    #   label-disconnected = %{F#F0C674}%ifname%%{F#707880} disconnected
+    #
+    #   [module/wlan]
+    #   inherit = network-base
+    #   interface-type = wireless
+    #   label-connected = %{F#F0C674}%ifname%%{F-} %essid%
+    #
+    #   [module/eth]
+    #   inherit = network-base
+    #   interface-type = wired
+    #   label-connected = %{F#F0C674}%ifname%%{F-} %local_ip%
+    #
+    # '';
   };
 
   programs.alacritty = {
@@ -300,32 +259,15 @@ in
     escapeTime = 0;
     historyLimit = 5000;
     baseIndex = 1;
-    terminal = "alacritty";
+    terminal = "xterm-256color";
     plugins = with pkgs; [
       tmuxPlugins.yank
       tmuxPlugins.vim-tmux-navigator
     ];
     extraConfig = ''
-      set -g pane-border-style 'fg=${colors.dim.white} bg=${colors.background}'
-      set -g pane-active-border-style 'bg=#15181A fg=colour14'
-
-      # statusbar
       set -g status-position bottom
       set -g status-justify left
-      set -g status-style 'bg=#15181A fg=colour7 dim'
-      set -g status-left "" 
-
-      set -g status-right "#S"
-
-      setw -g window-status-current-style 'fg=colour7  bg=#15181A bold'
-      setw -g window-status-current-format " #I:#W#F "
-
-      setw -g window-status-style 'fg=colour7 bg=#15181A' 
-      setw -g window-status-format ' #I:#W#F '
-      setw -g window-status-bell-style 'fg=colour0 bg=colour7 bold'
-
-      # messages
-      set -g message-style 'fg=colour0 bg=colour3 bold'
+      set -g status-left ""
 
       set-option -a terminal-features 'xterm-256color:RGB'
     '';
@@ -522,7 +464,6 @@ in
   };
 
   # gtk = {
-  #   enable = isLinux;
   #   theme = {
   #     package = pkgs.flat-remix-gtk;
   #     name = "Flat-Remix-GTK-Grey-Darkest";
