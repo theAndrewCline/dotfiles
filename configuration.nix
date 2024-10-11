@@ -68,11 +68,6 @@
 
   services.displayManager = {
     defaultSession = "none+i3";
-    sddm = {
-      enable = true;
-      enableHidpi = true;
-      theme = "chili";
-    };
   };
 
   services.blueman.enable = true;
@@ -119,33 +114,31 @@
     gcc
   ];
 
-  # programs.stylix = {
-  #   enable = true;
-  #   base16Scheme = import ./base16-theme.nix { };
-  #
-  #   image = ./red-blue-wall.jpg;
-  #
-  #   targets.neovim.enable = false;
-  #   targets.lazygit.enable = false;
-  #
-  #   fonts = {
-  #     monospace = {
-  #       package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
-  #       name = "JetBrainsMono Nerd Font";
-  #     };
-  #
-  #     serif = {
-  #       package = pkgs.dejavu_fonts;
-  #       name = "DejaVu Serif";
-  #     };
-  #
-  #     sansSerif = {
-  #       package = pkgs.dejavu_fonts;
-  #       name = "DejaVu Sans";
-  #     };
-  #   };
-  # };
-  #
+  stylix = {
+    enable = true;
+    base16Scheme = import ./base16-theme.nix { };
+    polarity = "dark";
+
+    image = ./images/leaves.jpg;
+
+    fonts = {
+      monospace = {
+        package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+        name = "JetBrainsMono Nerd Font";
+      };
+
+      serif = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Serif";
+      };
+
+      sansSerif = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Sans";
+      };
+    };
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

@@ -5,7 +5,7 @@
     nixpkgs.url = "nixpkgs/nixos-24.05";
     unstable-nixpkgs.url = "nixpkgs/nixos-unstable";
 
-    stylix.url = "github:danth/stylix";
+    stylix.url = "github:danth/stylix/release-24.05";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager.url = "github:nix-community/home-manager/release-24.05";
@@ -41,7 +41,10 @@
       homeConfigurations = {
         acline = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ ./home.nix ];
+          modules = [
+            ./home.nix
+            stylix.homeManagerModules.stylix
+          ];
           extraSpecialArgs = {
             inherit pkgs-unstable;
           };

@@ -6,7 +6,7 @@
   nixpkgs.config.allowUnfree = true;
   stylix.enable = true;
   stylix.base16Scheme = import ./base16-theme.nix { };
-  stylix.image = ./red-blue-wall.jpg;
+  stylix.image = ./images/leaves.jpg;
 
   stylix.targets.neovim.enable = false;
   stylix.targets.lazygit.enable = false;

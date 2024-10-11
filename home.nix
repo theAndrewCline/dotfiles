@@ -2,6 +2,7 @@
 
 let
   isLinux = pkgs.stdenv.isLinux;
+  colors = import ./base16-theme.nix { };
 in
 {
   imports = [ ];
@@ -46,14 +47,6 @@ in
     nixfmt-rfc-style
     mongosh
 
-    #i3 Stuff
-    sddm-chili-theme
-    rofi
-    picom
-    polybar
-    feh
-    lxappearance
-
     brave
 
     nodejs
@@ -62,6 +55,7 @@ in
     spotify
     slack
     telegram-desktop
+    zoom-us
     xclip
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
@@ -88,29 +82,29 @@ in
     # '')
   ];
 
-  # stylix.enable = true;
-  # stylix.base16Scheme = import ./base16-theme.nix { };
-  # stylix.image = ./red-blue-wall.jpg;
-  #
-  # stylix.targets.neovim.enable = false;
-  # stylix.targets.lazygit.enable = false;
-  #
-  # stylix.fonts = {
-  #   monospace = {
-  #     package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
-  #     name = "JetBrainsMono Nerd Font";
-  #   };
-  #
-  #   serif = {
-  #     package = pkgs.dejavu_fonts;
-  #     name = "DejaVu Serif";
-  #   };
-  #
-  #   sansSerif = {
-  #     package = pkgs.dejavu_fonts;
-  #     name = "DejaVu Sans";
-  #   };
-  # };
+  stylix.enable = true;
+  stylix.base16Scheme = colors;
+  stylix.image = ./images/leaves.jpg;
+  stylix.fonts.sizes.desktop = 22;
+
+  stylix.fonts = {
+    monospace = {
+      package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+      name = "JetBrainsMono Nerd Font";
+    };
+
+    # TODO: Find new font
+    serif = {
+      package = pkgs.dejavu_fonts;
+      name = "DejaVu Serif";
+    };
+
+    # TODO: Find new font
+    sansSerif = {
+      package = pkgs.dejavu_fonts;
+      name = "DejaVu Sans";
+    };
+  };
 
   programs.zsh = {
     enable = true;
@@ -126,107 +120,10 @@ in
     '';
   };
 
+  # TODO: Figure out how to simlink nvim config for dyamic editting 
   xdg.configFile = {
     "i3/config".text = builtins.readFile ./xdg/i3;
     "nvim/init.lua".text = builtins.readFile ./xdg/nvim.lua;
-    "rofi/config.lua".text = builtins.readFile ./xdg/rofi.rasi;
-    "rofi/theme.lua".text = builtins.readFile ./xdg/rofi-theme.rasi;
-
-    # "polybar/config.ini".text = ''
-    #   [bar/minimal]
-    #   height=3%
-    #   radius=0
-    #   width=100%
-    #
-    #   dpi = 96
-    #
-    #   # background = ${colors.background}
-    #   # foreground = ${colors.foreground}
-    #
-    #   font-0 = JetBrainsMono Nerd Font:size=22
-    #
-    #   module-margin = 1
-    #   padding-right = 1
-    #
-    #   modules-center = date
-    #   modules-left = xworkspaces xwindow
-    #   modules-right =  memory cpu wlan eth
-    #
-    #   [module/date]
-    #   date=%d-%m.%y
-    #   internal=5
-    #   label=%time% %date%
-    #   time=%H:%M
-    #   type=internal/date
-    #
-    #   [module/xworkspaces]
-    #   type = internal/xworkspaces
-    #
-    #   label-active = %name%
-    #   label-active-background = ${colors.bright.white} 
-    #   label-active-foreground = ${colors.foreground} 
-    #   ; label-active-underline= "" 
-    #   label-active-padding = 1
-    #
-    #   label-occupied = %name%
-    #   label-occupied-padding = 1
-    #
-    #   label-urgent = %name%
-    #   ; label-urgent-background = ""
-    #   label-urgent-padding = 1
-    #
-    #   label-empty = %name%
-    #   ; label-empty-foreground = ""
-    #   label-empty-padding = 1
-    #
-    #   [module/xwindow]
-    #   type = internal/xwindow
-    #   label = %title:0:60:...%
-    #
-    #   [module/memory]
-    #   type = internal/memory
-    #   interval = 2
-    #   format-prefix = "RAM "
-    #   format-prefix-foreground = ${colors.foreground}
-    #   label = %percentage_used:2%%
-    #
-    #   [module/cpu]
-    #   type = internal/cpu
-    #   interval = 2
-    #   format-prefix = "CPU "
-    #   format-prefix-foreground = ${colors.foreground}
-    #   label = %percentage:2%%
-    #
-    #   [network-base]
-    #   type = internal/network
-    #   interval = 5
-    #   format-connected = <label-connected>
-    #   format-disconnected = <label-disconnected>
-    #   label-disconnected = %{F#F0C674}%ifname%%{F#707880} disconnected
-    #
-    #   [module/wlan]
-    #   inherit = network-base
-    #   interface-type = wireless
-    #   label-connected = %{F#F0C674}%ifname%%{F-} %essid%
-    #
-    #   [module/eth]
-    #   inherit = network-base
-    #   interface-type = wired
-    #   label-connected = %{F#F0C674}%ifname%%{F-} %local_ip%
-    #
-    # '';
-  };
-
-  programs.alacritty = {
-    enable = true;
-    settings = {
-      window = {
-        padding = {
-          x = 20;
-          y = 20;
-        };
-      };
-    };
   };
 
   programs.wezterm = {
@@ -234,7 +131,7 @@ in
     extraConfig = ''
       return {
         enable_tab_bar = false,
-        font_size = 24,
+        font_size = 22,
         window_padding = {
           left = 30,
           right = 30,
@@ -265,9 +162,12 @@ in
       tmuxPlugins.vim-tmux-navigator
     ];
     extraConfig = ''
+      # statusbar
       set -g status-position bottom
       set -g status-justify left
-      set -g status-left ""
+      set -g status-left "" 
+      set -g status-right "#S"
+      setw -g window-status-format ' #I:#W#F '
 
       set-option -a terminal-features 'xterm-256color:RGB'
     '';
@@ -421,7 +321,7 @@ in
 
   programs.git = {
     enable = true;
-    userEmail = "acline@precisionplanting.com";
+    userEmail = "andrew.cline77@gmail.com";
     userName = "Andrew Cline";
     extraConfig = {
       init.defaultBranch = "main";
@@ -463,20 +363,79 @@ in
     nix-direnv.enable = true;
   };
 
-  # gtk = {
-  #   theme = {
-  #     package = pkgs.flat-remix-gtk;
-  #     name = "Flat-Remix-GTK-Grey-Darkest";
-  #   };
-  #   iconTheme = {
-  #     package = pkgs.gnome.adwaita-icon-theme;
-  #     name = "Adwaita";
-  #   };
-  #   font = {
-  #     name = "Sans";
-  #     size = 11;
-  #   };
-  # };
+  programs.feh = {
+    enable = true;
+  };
+
+  programs.rofi = {
+    enable = true;
+    extraConfig = {
+      modi = "run,window,combi";
+      display-combi = " 🖥️  All ";
+      display-run = " 🏃  Run ";
+      display-window = " 🪟  Window";
+    };
+  };
+
+  services.picom = {
+    enable = true;
+    fade = true;
+    fadeDelta = 2;
+  };
+
+  services.polybar = {
+    enable = true;
+    script = "polybar min &";
+    config = {
+      "bar/min" = {
+        height = "3%";
+        radius = 0;
+        width = "100%";
+        dpi = 96;
+        bottom = false;
+        module-margin = 1;
+        padding-right = 1;
+        modules-left = "xworkspaces xwindow";
+        modules-right = "date";
+        font-0 = "JetBrainsMono Nerd Font:size=18";
+        background = colors.base00;
+      };
+
+      "module/date" = {
+        type = "internal/date";
+        internal = 5;
+        date = "%d.%m.%y";
+        time = "%H:%M";
+        label = "%time% %date%";
+      };
+
+      "module/xworkspaces" = {
+        type = "internal/xworkspaces";
+
+        label-active = "%name%";
+        label-active-background = colors.base0C;
+        label-active-padding = 1;
+
+        label-occupied = "%name%";
+        label-occupied-background = colors.base01;
+        label-occupied-padding = 1;
+
+        label-urgent = "%name%";
+        label-urgent-background = colors.base09;
+        label-urgent-padding = 1;
+
+        label-empty = "%name%";
+        label-empty-background = colors.base01;
+        label-empty-padding = 1;
+      };
+
+      "module/xwindow" = {
+        type = "internal/xwindow";
+        label = "%title:0:60:...%";
+        format-foreground = colors.base03;
+      };
+    };
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
