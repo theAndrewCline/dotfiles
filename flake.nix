@@ -56,6 +56,7 @@
           pkgs = nixpkgs.legacyPackages."aarch64-darwin";
           modules = [
             ./macos.nix
+            ./dev-env.nix
             stylix.homeManagerModules.stylix
           ];
           extraSpecialArgs =

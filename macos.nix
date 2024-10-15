@@ -48,20 +48,7 @@
     nil
     speedtest-rs
     monaspace
-    gh
-    glab
-    bat
-    eza
-    ripgrep
-    protobuf
-    jq
-    yq
-    fx
-    fd
-    tldr
-    localstack
-    lazydocker
-    nixfmt-rfc-style
+
     raycast
     pkgs-unstable.sqlite
 
@@ -79,24 +66,6 @@
     # '')
   ];
 
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    syntaxHighlighting.enable = true;
-    history.ignoreDups = true;
-    initExtraBeforeCompInit = "autoload bashcompinit && bashcompinit";
-    initExtra = ''
-      complete -C 'aws_completer' aws
-      autoload -z edit-command-line
-      zle -N edit-command-line
-      bindkey \"^X^E\" edit-command-line
-    '';
-  };
-
-  xdg.configFile = {
-    "nvim/init.lua".text = builtins.readFile ./xdg/nvim.lua;
-  };
-
   programs.wezterm = {
     enable = true;
     extraConfig = ''
@@ -113,179 +82,11 @@
     '';
   };
 
-  programs.atuin = {
-    enable = true;
-    enableZshIntegration = true;
-    flags = [ "--disable-up-arrow" ];
-  };
-
-  programs.tmux = {
-    enable = true;
-    mouse = true;
-    keyMode = "vi";
-    prefix = "C-a";
-    escapeTime = 0;
-    historyLimit = 5000;
-    baseIndex = 1;
-    terminal = "screen-256color";
-    plugins = with pkgs; [
-      tmuxPlugins.yank
-      tmuxPlugins.vim-tmux-navigator
-      tmuxPlugins.resurrect
-    ];
-    extraConfig = ''
-
-      # statusbar
-      set -g status-position bottom
-      set -g status-justify left
-      set -g status-left "" 
-      set -g status-right "#S"
-      setw -g window-status-format ' #I:#W#F '
-
-      set-option -a terminal-features 'xterm-256color:RGB'
-    '';
-  };
-
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  home.file = {
-    ".scripts/o".source = ./scripts/o;
-  };
-
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. These will be explicitly sourced when using a
-  # shell provided by Home Manager. If you don't want to manage your shell
-  # through Home Manager then you have to manually source 'hm-session-vars.sh'
-  # located at either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/cline/etc/profile.d/hm-session-vars.sh
-  #
-  home.sessionVariables = {
-    EDITOR = "nvim";
-    NPM_CONFIG_PREFIX = "~/.local";
-  };
-
-  home.shellAliases = {
-    x = "exit";
-    lg = "lazygit";
-    hms = "home-manager switch";
-    v = "nvim";
-  };
-
   home.sessionPath = [
     "$HOME/.local/bin"
     "$HOME/go/bin"
     "$HOME/.scripts"
   ];
-
-  programs.oh-my-posh = {
-    enable = true;
-    enableZshIntegration = true;
-    settings = {
-      "$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json";
-      final_space = true;
-      version = 2;
-      blocks = [
-        {
-          type = "prompt";
-          alignment = "left";
-          newline = true;
-          segments = [
-            {
-              type = "path";
-              style = "plain";
-              foreground = "cyan";
-              background = "transparent";
-              properties = {
-                style = "full";
-              };
-              template = "{{ .Path }} ";
-            }
-            {
-              type = "git";
-              style = "plain";
-              background = "transparent";
-              foreground = "#737A82";
-              template = " {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</> ";
-              properties = {
-                branch_icon = "";
-                fetch_status = true;
-                commit_icon = "@";
-              };
-            }
-            {
-              type = "aws";
-              style = "plain";
-              foreground = "yellow";
-              background = "transparent";
-              template = "  {{.Profile}}";
-            }
-          ];
-        }
-
-        {
-          type = "rprompt";
-          overflow = "hidden";
-          alignment = "right";
-          segments = [
-            {
-              type = "executiontime";
-              style = "plain";
-              foreground = "lightYellow";
-              background = "transparent";
-              template = "{{ .FormattedMs }}";
-              properties = {
-                threshold = 5000;
-              };
-            }
-          ];
-        }
-
-        {
-          type = "prompt";
-          alignment = "left";
-          newline = true;
-          segments = [
-            {
-              type = "text";
-              style = "plain";
-              foreground_templates = [
-                "{{if gt .Code 0}}red{{end}}"
-                "{{if eq .Code 0}}blue{{end}}"
-              ];
-              template = "❯";
-            }
-          ];
-        }
-      ];
-      transient_prompt = {
-        background = "transparent";
-        template = "❯ ";
-        foreground_templates = [
-          "{{if gt .Code 0}}red{{end}}"
-          "{{if eq .Code 0}}blue{{end}}"
-        ];
-      };
-    };
-  };
-
-  programs.fzf = {
-    enable = true;
-  };
-
-  programs.neovim = {
-    enable = true;
-    package = pkgs-unstable.neovim-unwrapped;
-    defaultEditor = true;
-  };
 
   programs.git = {
     enable = true;
