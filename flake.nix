@@ -14,6 +14,7 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       home-manager,
       unstable-nixpkgs,
@@ -27,6 +28,7 @@
       pkgs = nixpkgs.legacyPackages.${system};
       pkgs-unstable = unstable-nixpkgs.legacyPackages.${system};
     in
+
     {
       nixosConfigurations = {
         sleepydesktop = lib.nixosSystem {
