@@ -8,9 +8,6 @@
   stylix.base16Scheme = import ./base16-theme.nix { };
   stylix.image = ./images/leaves.jpg;
 
-  stylix.targets.neovim.enable = false;
-  stylix.targets.lazygit.enable = false;
-
   stylix.fonts = {
     monospace = {
       package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
