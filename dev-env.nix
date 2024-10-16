@@ -1,39 +1,6 @@
 { pkgs, pkgs-unstable, ... }:
 
 {
-
-  home.packages = with pkgs; [
-    gh
-    glab
-    bat
-    eza
-    ripgrep
-    protobuf
-    jq
-    yq
-    fx
-    fd
-    tldr
-    localstack
-    lazydocker
-    nixfmt-rfc-style
-
-    httpie
-    atuin
-    nodejs
-    pnpm
-    pkgs-unstable.deno
-    yarn-berry
-    pkgs-unstable.mods
-    go
-    rustup
-    marksman
-    gopls
-    nodePackages.prettier
-    nodePackages.typescript-language-server
-    nodePackages.typescript
-  ];
-
   programs.zsh = {
     enable = true;
     enableCompletion = true;

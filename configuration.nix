@@ -64,6 +64,13 @@
     xkb = { };
     videoDrivers = [ "nvidia" ];
     windowManager.i3.enable = true;
+    displayManager.gdm = {
+      enable = true;
+    };
+  };
+
+  programs.hyprland = {
+    enable = true;
   };
 
   services.displayManager = {
@@ -78,6 +85,13 @@
     # _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2.2"; # default 1 I think
     # QT_AUTO_SCREEN_SCALE_FACTOR = "1";
     # XCURSOR_SIZE = "64"; # default 16 I think
+  };
+
+  environment.sessionVariables = {
+    # If your cursor becomes invisible
+    WLR_NO_HARDWARE_CURSORS = "1";
+    # Hint electron apps to use wayland
+    NIXOS_OZONE_WL = "1";
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.

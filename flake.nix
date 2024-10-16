@@ -45,6 +45,7 @@
           inherit pkgs;
           modules = [
             ./home.nix
+            ./dev-env.nix
             stylix.homeManagerModules.stylix
           ];
           extraSpecialArgs = {

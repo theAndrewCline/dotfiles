@@ -13,24 +13,13 @@ in
   home.homeDirectory = "/home/acline";
   home.packages = with pkgs; [
     openssl
-    httpie
-    atuin
-    nodejs
-    pnpm
-    deno
-    yarn-berry
-    mods
-    go
-    rustup
-    marksman
-    gopls
-    nodePackages.prettier
-    nodePackages.typescript-language-server
-    vscode-langservers-extracted
-    postgresql_14
-    nil
-    speedtest-rs
-    monaspace
+    brave
+    spotify
+    slack
+    telegram-desktop
+    zoom-us
+    xclip
+
     gh
     glab
     bat
@@ -45,18 +34,21 @@ in
     localstack
     lazydocker
     nixfmt-rfc-style
-    mongosh
 
-    brave
-
+    httpie
+    atuin
     nodejs
+    pnpm
+    pkgs-unstable.deno
+    yarn-berry
+    pkgs-unstable.mods
     go
     rustup
-    spotify
-    slack
-    telegram-desktop
-    zoom-us
-    xclip
+    marksman
+    gopls
+    nodePackages.prettier
+    nodePackages.typescript-language-server
+    nodePackages.typescript
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -106,71 +98,8 @@ in
     };
   };
 
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    syntaxHighlighting.enable = true;
-    history.ignoreDups = true;
-    initExtraBeforeCompInit = "autoload bashcompinit && bashcompinit";
-    initExtra = ''
-      complete -C 'aws_completer' aws
-      autoload -z edit-command-line
-      zle -N edit-command-line
-      bindkey \"^X^E\" edit-command-line
-    '';
-  };
-
-  # TODO: Figure out how to simlink nvim config for dyamic editting 
   xdg.configFile = {
     "i3/config".text = builtins.readFile ./xdg/i3;
-    "nvim/init.lua".text = builtins.readFile ./xdg/nvim.lua;
-  };
-
-  programs.wezterm = {
-    enable = true;
-    extraConfig = ''
-      return {
-        enable_tab_bar = false,
-        font_size = 22,
-        window_padding = {
-          left = 30,
-          right = 30,
-          top = 30,
-          bottom = 30,
-        },
-      }
-    '';
-  };
-
-  programs.atuin = {
-    enable = true;
-    enableZshIntegration = true;
-    flags = [ "--disable-up-arrow" ];
-  };
-
-  programs.tmux = {
-    enable = true;
-    mouse = true;
-    keyMode = "vi";
-    prefix = "C-a";
-    escapeTime = 0;
-    historyLimit = 5000;
-    baseIndex = 1;
-    terminal = "xterm-256color";
-    plugins = with pkgs; [
-      tmuxPlugins.yank
-      tmuxPlugins.vim-tmux-navigator
-    ];
-    extraConfig = ''
-      # statusbar
-      set -g status-position bottom
-      set -g status-justify left
-      set -g status-left "" 
-      set -g status-right "#S"
-      setw -g window-status-format ' #I:#W#F '
-
-      set-option -a terminal-features 'xterm-256color:RGB'
-    '';
   };
 
   fonts.fontconfig.enable = isLinux;
@@ -200,124 +129,6 @@ in
   #
   #  /etc/profiles/per-user/cline/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = {
-    EDITOR = "nvim";
-    NPM_CONFIG_PREFIX = "~/.local";
-  };
-
-  home.shellAliases = {
-    x = "exit";
-    lg = "lazygit";
-    hms = "home-manager switch";
-    v = "nvim";
-  };
-
-  home.sessionPath = [
-    "$HOME/.local/bin"
-    "$HOME/go/bin"
-    "$HOME/.scripts"
-  ];
-
-  programs.oh-my-posh = {
-    enable = true;
-    enableZshIntegration = true;
-    settings = {
-      "$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json";
-      final_space = true;
-      version = 2;
-      blocks = [
-        {
-          type = "prompt";
-          alignment = "left";
-          newline = true;
-          segments = [
-            {
-              type = "path";
-              style = "plain";
-              foreground = "cyan";
-              background = "transparent";
-              properties = {
-                style = "full";
-              };
-              template = "{{ .Path }} ";
-            }
-            {
-              type = "git";
-              style = "plain";
-              background = "transparent";
-              foreground = "#5b5f66";
-              template = " {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</> ";
-              properties = {
-                branch_icon = "";
-                fetch_status = true;
-                commit_icon = "@";
-              };
-            }
-            {
-              type = "aws";
-              style = "plain";
-              foreground = "yellow";
-              background = "transparent";
-              template = "  {{.Profile}}";
-            }
-          ];
-        }
-
-        {
-          type = "rprompt";
-          overflow = "hidden";
-          alignment = "right";
-          segments = [
-            {
-              type = "executiontime";
-              style = "plain";
-              foreground = "lightYellow";
-              background = "transparent";
-              template = "{{ .FormattedMs }}";
-              properties = {
-                threshold = 5000;
-              };
-            }
-          ];
-        }
-
-        {
-          type = "prompt";
-          alignment = "left";
-          newline = true;
-          segments = [
-            {
-              type = "text";
-              style = "plain";
-              foreground_templates = [
-                "{{if gt .Code 0}}red{{end}}"
-                "{{if eq .Code 0}}blue{{end}}"
-              ];
-              template = "❯";
-            }
-          ];
-        }
-      ];
-      transient_prompt = {
-        background = "transparent";
-        template = "❯ ";
-        foreground_templates = [
-          "{{if gt .Code 0}}red{{end}}"
-          "{{if eq .Code 0}}blue{{end}}"
-        ];
-      };
-    };
-  };
-
-  programs.fzf = {
-    enable = true;
-  };
-
-  programs.neovim = {
-    enable = true;
-    package = pkgs-unstable.neovim-unwrapped;
-    defaultEditor = true;
-  };
 
   programs.git = {
     enable = true;
@@ -377,10 +188,30 @@ in
     };
   };
 
-  services.picom = {
+  programs.wofi = {
     enable = true;
+  };
+
+  services.picom = {
+    enable = false;
     fade = true;
     fadeDelta = 2;
+  };
+
+  programs.wezterm = {
+    enable = true;
+    extraConfig = ''
+      return {
+        enable_tab_bar = false,
+        font_size = 16,
+        window_padding = {
+          left = 30,
+          right = 30,
+          top = 30,
+          bottom = 30,
+        },
+      }
+    '';
   };
 
   services.polybar = {
