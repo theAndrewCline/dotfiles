@@ -77,6 +77,10 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+vim.g.markdown_fenced_languages = {
+	"ts=typescript",
+}
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -440,6 +444,9 @@ require("lazy").setup({
 				templ = {},
 				rust_analyzer = {},
 				ts_ls = {},
+				-- denols = {
+				-- 	root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc", ".git", "package.json"),
+				-- },
 				eslint = {},
 				astro = {},
 				ruby_lsp = {},

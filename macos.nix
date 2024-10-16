@@ -29,21 +29,6 @@
   home.homeDirectory = "/Users/cline";
   home.packages = with pkgs; [
     openssl
-    httpie
-    atuin
-    nodejs
-    pnpm
-    pkgs-unstable.deno
-    yarn-berry
-    pkgs-unstable.mods
-    go
-    rustup
-    marksman
-    gopls
-    nodePackages.prettier
-    nodePackages.typescript-language-server
-    nodePackages.typescript
-    vscode-langservers-extracted
     postgresql_14
     nil
     speedtest-rs

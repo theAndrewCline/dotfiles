@@ -17,6 +17,21 @@
     localstack
     lazydocker
     nixfmt-rfc-style
+
+    httpie
+    atuin
+    nodejs
+    pnpm
+    pkgs-unstable.deno
+    yarn-berry
+    pkgs-unstable.mods
+    go
+    rustup
+    marksman
+    gopls
+    nodePackages.prettier
+    nodePackages.typescript-language-server
+    nodePackages.typescript
   ];
 
   programs.zsh = {
@@ -159,7 +174,7 @@
 
   programs.neovim = {
     enable = true;
-    package = pkgs-unstable.neovim;
+    package = pkgs-unstable.neovim-unwrapped;
     defaultEditor = true;
   };
 
